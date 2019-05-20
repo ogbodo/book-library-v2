@@ -8,3 +8,6 @@ const generateId = require('../helpers/id-generator'); //Import our helper funct
 function Admin(firstName, lastName, gender) {
   user.call(this, firstName, lastName, gender, 'ADMIN'); //To enable proper inheritance
 }
+
+//Make Admin inherits from User
+inheritProperty(user, Admin);
