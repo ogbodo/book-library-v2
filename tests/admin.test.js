@@ -6,9 +6,8 @@ var Student = require('../constructors/student'); //Import the Student object
 describe('All about Admin own account functionalities', function() {
   test('Admin can be created', function() {
     var admin = new Admin('Izuking', 'Ogbodo', 'Male');
-    const { firstName } = admin; //Using the object destructuring pattern to get the first name only
 
-    expect(firstName).toBe('Izuking');
+    expect(admin.getFirstName()).toBe('Izuking');
   });
 
   describe('Admin details can be updated', function() {
