@@ -23,3 +23,16 @@ Admin.prototype.getUserByID = function(id) {
 
   return false; //Returns false if no user with such id exists
 };
+
+//Get all users with same either first-name or last-name
+Admin.prototype.searchUserByName = function(name) {
+  var users = this.getUsers(), //Returns the collection of Users
+    results = [];
+  for (var index = 0; index < users.length; index++) {
+    //Compare each user id with the user id we are interested in.
+    if (users[index].firstName === name || users[index].lastName === name) {
+      results.push(users[index]); //Adds this found user in our result collection
+    }
+  }
+  return results.length === 0 ? false : results; //Returns false if no result found else returns true
+};
