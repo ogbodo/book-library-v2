@@ -1,16 +1,16 @@
-const Admin = require('../constructors/admin'); //Import the Admin object
-const Teacher = require('../constructors/teacher'); //Import the Teacher object
-const Student = require('../constructors/student'); //Import the Student object
+const admin = require('../constructors/admin'); //Import the admin object
+const teacher = require('../constructors/teacher'); //Import the teacher object
+const student = require('../constructors/student'); //Import the student object
 
-//Functionalities of Admin with respect to own account
-describe('All about Admin own account functionalities', function() {
-  test('Admin can be created', function() {
-    const admin = new Admin('Izuking', 'Ogbodo', 'Male');
+//Functionalities of admin with respect to own account
+describe('All about admin own account functionalities', function() {
+  test('admin can be created', function() {
+    const admin = new admin('Izuking', 'Ogbodo', 'Male');
     expect(admin.getFirstName()).toBe('Izuking');
   });
 
-  describe('Admin details can be updated', function() {
-    const admin = new Admin('Treasure', ' Ogbonna', 'Female');
+  describe('admin details can be updated', function() {
+    const admin = new admin('Treasure', ' Ogbonna', 'Female');
 
     test('For the case of personal details', function() {
       admin.updatePersonalDetails('Natasha', 'Ade');
@@ -19,43 +19,43 @@ describe('All about Admin own account functionalities', function() {
     });
   });
 
-  test('Admin account can be deleted', function() {
-    const admin = new Admin('Matthias', ' King', 'Male');
+  test('admin account can be deleted', function() {
+    const admin = new admin('Matthias', ' King', 'Male');
     expect(admin.delete()).toBeTruthy();
   });
 
-  test('Admin details can be read', function() {
-    const admin = new Admin('Matthias ', 'Ogbonna', 'Male');
+  test('admin details can be read', function() {
+    const admin = new admin('Matthias ', 'Ogbonna', 'Male');
     expect(admin.retrieveDetails()).toEqual(admin);
   });
 });
 
-//Functionalities of Admin with respect to students and teachers
-describe('All about Admin and other users', function() {
-  describe('Admin can perform group search on all users', function() {
-    var admin = new Admin('Matthias', ' Ogbonna', 'Male');
+//Functionalities of admin with respect to students and teachers
+describe('All about admin and other users', function() {
+  describe('admin can perform group search on all users', function() {
+    var admin = new admin('Matthias', ' Ogbonna', 'Male');
 
-    test('For the case of Admin to get all teachers', function() {
-      expect(admin.getAllTeachers()).toBeTruthy();
+    test('For the case of admin to get all teachers', function() {
+      expect(admin.getAllteachers()).toBeTruthy();
     });
 
-    test('For the case of Admin to get all students', function() {
-      expect(admin.getAllStudents()).toBeTruthy();
+    test('For the case of admin to get all students', function() {
+      expect(admin.getAllstudents()).toBeTruthy();
     });
 
-    test('For the case of Admin to get all admins', function() {
-      expect(admin.getAllAdmins()).toBeTruthy();
+    test('For the case of admin to get all admins', function() {
+      expect(admin.getAlladmins()).toBeTruthy();
     });
 
     test('For the case where admin wants to get users when none exists', function() {
-      expect(admin.getAllAdmins()).toBeTruthy();
+      expect(admin.getAlladmins()).toBeTruthy();
     });
   });
 
-  describe('Admin can perform search on other users', function() {
-    var admin = new Admin('Matthias', ' Ogbonna', 'Male');
+  describe('admin can perform search on other users', function() {
+    var admin = new admin('Matthias', ' Ogbonna', 'Male');
 
-    var student = new Student(
+    var student = new student(
       'Solomon',
       'Izukerberg',
       '2041200015',
@@ -65,7 +65,7 @@ describe('All about Admin and other users', function() {
       '200'
     );
 
-    var teacher = new Teacher(
+    var teacher = new teacher(
       'David',
       'Mogbeyi',
       'Dev/1/340',
@@ -110,10 +110,10 @@ describe('All about Admin and other users', function() {
       expect(admin.searchUserByName('Josephat')).toBeFalsy();
     });
 
-    describe('Admin can read other users by Matric Number or Staff Id', function() {
-      var admin = new Admin('Matthias', ' Ogbonna', 'Male');
+    describe('admin can read other users by Matric Number or Staff Id', function() {
+      var admin = new admin('Matthias', ' Ogbonna', 'Male');
 
-      var student = new Student(
+      var student = new student(
         'Mary',
         'Godwin',
         '45302312004',
@@ -123,7 +123,7 @@ describe('All about Admin and other users', function() {
         '400'
       );
 
-      var teacher = new Teacher(
+      var teacher = new teacher(
         'Adedayo',
         'Olagunju',
         'Dev/0012/4321',
@@ -132,26 +132,26 @@ describe('All about Admin and other users', function() {
         'English'
       );
       test('For the case of reading a student by Matric Number', function() {
-        expect(admin.readStudent(student.matricNumber)).toEqual(student);
+        expect(admin.readstudent(student.matricNumber)).toEqual(student);
       });
 
       test('For the case of reading a teacher by staffId', function() {
-        expect(admin.readTeacher(teacher.staffId)).toEqual(teacher);
+        expect(admin.readteacher(teacher.staffId)).toEqual(teacher);
       });
 
       test('For the case of reading a student by wrong Matric Number', function() {
-        expect(admin.readStudent('111110000899')).toBeFalsy();
+        expect(admin.readstudent('111110000899')).toBeFalsy();
       });
 
       test('For the case of reading a teacher by wrong staffId', function() {
-        expect(admin.readTeacher('dev/000/00018')).toBeFalsy();
+        expect(admin.readteacher('dev/000/00018')).toBeFalsy();
       });
     });
 
-    describe('Admin can delete other users', function() {
-      var admin = new Admin('Matthias', ' Ogbonna', 'Male');
+    describe('admin can delete other users', function() {
+      var admin = new admin('Matthias', ' Ogbonna', 'Male');
 
-      var student = new Student(
+      var student = new student(
         'Lydia',
         'Habbiba',
         '90128780',
@@ -161,7 +161,7 @@ describe('All about Admin and other users', function() {
         '100'
       );
 
-      var teacher = new Teacher(
+      var teacher = new teacher(
         'Ashemole',
         'Mike',
         'Dev/98/0023',
@@ -170,7 +170,7 @@ describe('All about Admin and other users', function() {
         'Mathematics'
       );
 
-      test('Admin trying to delete a non existing user', function() {
+      test('admin trying to delete a non existing user', function() {
         expect(admin.deleteUser(20)).toBe('User Not Found');
       });
 
@@ -183,45 +183,45 @@ describe('All about Admin and other users', function() {
       });
 
       test('For the case of deleting all teacher', function() {
-        expect(admin.deleteAllTeachers()).toBeTruthy();
+        expect(admin.deleteAllteachers()).toBeTruthy();
       });
 
       test('For the case of deleting all student', function() {
-        expect(admin.deleteAllStudents()).toBeTruthy();
+        expect(admin.deleteAllstudents()).toBeTruthy();
       });
 
       describe('For the case where admin wants to delete users when none exists', function() {
         test('For the case of deleting all student', function() {
-          expect(admin.deleteAllStudents()).toBeTruthy();
+          expect(admin.deleteAllstudents()).toBeTruthy();
         });
 
         test('For the case of deleting all teacher', function() {
-          expect(admin.deleteAllTeachers()).toBeFalsy();
+          expect(admin.deleteAllteachers()).toBeFalsy();
         });
       });
     });
   });
 });
 
-//Functionalities of Admin with respect to the Library
-describe('All about Admin as the librarian', function() {
-  var admin = new Admin('Matthias', ' Ogbonna', 'Male');
+//Functionalities of admin with respect to the Library
+describe('All about admin as the librarian', function() {
+  var admin = new admin('Matthias', ' Ogbonna', 'Male');
 
-  test('Admin can add new books into the library', function() {
+  test('admin can add new books into the library', function() {
     expect(
       admin.addBook('What Men Want', 'Journal', 'Izuking Ogbodo').title
     ).toBe('What Men Want');
   });
 
-  describe('Admin can perform retrieval of books', function() {
+  describe('admin can perform retrieval of books', function() {
     var book = admin.addBook('Chike the River', 'Literature', 'Chinuwa Achebe');
 
-    test('Admin can get all books', function() {
+    test('admin can get all books', function() {
       expect(admin.getAllBooks().length).toBe(5);
     });
   });
 
-  test('Admin can update a book title', function() {
+  test('admin can update a book title', function() {
     var newBook = admin.addBook(
       'Chike the River',
       'Literature',
@@ -232,14 +232,14 @@ describe('All about Admin as the librarian', function() {
     );
   });
 
-  describe('Admin can perform lending of books', function() {
+  describe('admin can perform lending of books', function() {
     var book = admin.addBook('Become a Good Librarian', 'Journal', 'Mcan long');
 
     test('For the case where admin demands for book and its available', function() {
       expect(admin.lendBook(admin, book.id).userId).toBe(admin.id);
     });
 
-    var student = new Student(
+    var student = new student(
       'Lydia',
       'Habbiba',
       '90128780',
@@ -249,7 +249,7 @@ describe('All about Admin as the librarian', function() {
       '100'
     );
 
-    var teacher = new Teacher(
+    var teacher = new teacher(
       'Ashemole',
       'Mike',
       'Dev/98/0023',
@@ -258,7 +258,7 @@ describe('All about Admin as the librarian', function() {
       'Mathematics'
     );
 
-    describe('Between Admin and two users', function() {
+    describe('Between admin and two users', function() {
       describe('Priority between teacher and student users', function() {
         var book = admin.addBook('Security Tips', 'Article', 'Ben Mark');
 
@@ -276,7 +276,7 @@ describe('All about Admin as the librarian', function() {
               'Ben Mark'
             );
 
-            var secondTeacher = new Teacher(
+            var secondteacher = new teacher(
               'Ayo',
               'James',
               'Dev/61/223',
@@ -286,7 +286,7 @@ describe('All about Admin as the librarian', function() {
             );
 
             expect(
-              admin.lendBook([teacher, secondTeacher], book.id).userId
+              admin.lendBook([teacher, secondteacher], book.id).userId
             ).toEqual(teacher.id);
           });
         });
@@ -298,7 +298,7 @@ describe('All about Admin as the librarian', function() {
               'Article',
               'Ben Mark'
             );
-            var firstStudent = new Student(
+            var firststudent = new student(
               'James',
               'John',
               '76600001',
@@ -307,7 +307,7 @@ describe('All about Admin as the librarian', function() {
               'Chemistry',
               '100'
             );
-            var secondStudent = new Student(
+            var secondstudent = new student(
               'Lydia',
               'Habbiba',
               '2211123',
@@ -318,14 +318,14 @@ describe('All about Admin as the librarian', function() {
             );
 
             expect(
-              admin.lendBook([firstStudent, secondStudent], book.id).userId
-            ).toEqual(firstStudent.id);
+              admin.lendBook([firststudent, secondstudent], book.id).userId
+            ).toEqual(firststudent.id);
           });
         });
       });
 
       describe('Priority between Senior and Junior students', function() {
-        var juniorStudent = new Student(
+        var juniorstudent = new student(
           'Lydia',
           'Habbiba',
           '90128780',
@@ -334,7 +334,7 @@ describe('All about Admin as the librarian', function() {
           'Political Science',
           '100'
         );
-        var seniorStudent = new Student(
+        var seniorstudent = new student(
           'James',
           'John',
           '4522091',
@@ -347,14 +347,14 @@ describe('All about Admin as the librarian', function() {
 
         test('For the case where two students of different levels demands for a book and its available', function() {
           expect(
-            admin.lendBook([juniorStudent, seniorStudent], book.id).userId
-          ).toEqual(seniorStudent.id);
+            admin.lendBook([juniorstudent, seniorstudent], book.id).userId
+          ).toEqual(seniorstudent.id);
         });
       });
     });
 
-    describe('Between Admin and three or more users', function() {
-      var secondTeacher = new Teacher(
+    describe('Between admin and three or more users', function() {
+      var secondteacher = new teacher(
         'Ayo',
         'James',
         'Dev/61/223',
@@ -366,13 +366,13 @@ describe('All about Admin as the librarian', function() {
         var book = admin.addBook('Security Tips Part 4', 'Article', 'Ben Mark');
 
         expect(
-          admin.lendBook([student, teacher, secondTeacher], book.id).userId
+          admin.lendBook([student, teacher, secondteacher], book.id).userId
         ).toEqual(teacher.id);
       });
 
       test('For the case where two student and a teacher demands for a book and its available', function() {
         var book = admin.addBook('Security Tips Part 5', 'Article', 'Ben Mark');
-        var seniorStudent = new Student(
+        var seniorstudent = new student(
           'James',
           'John',
           '4522091',
@@ -383,15 +383,15 @@ describe('All about Admin as the librarian', function() {
         );
 
         expect(
-          admin.lendBook([student, seniorStudent, secondTeacher], book.id)
+          admin.lendBook([student, seniorstudent, secondteacher], book.id)
             .userId
-        ).toEqual(secondTeacher.id);
+        ).toEqual(secondteacher.id);
       });
     });
   });
 
-  describe('Admin can perform deletion of books', function() {
-    test('Admin can delete a book', function() {
+  describe('admin can perform deletion of books', function() {
+    test('admin can delete a book', function() {
       var newBook = admin.addBook(
         'Chike the River',
         'Literature',
@@ -399,11 +399,11 @@ describe('All about Admin as the librarian', function() {
       );
       expect(admin.deleteBook(newBook.id)).toBeTruthy();
     });
-    test('Admin trying to delete a non existing book', function() {
+    test('admin trying to delete a non existing book', function() {
       expect(admin.deleteBook(20)).toBe('Book Not Found');
     });
 
-    test('Admin can delete all book', function() {
+    test('admin can delete all book', function() {
       expect(admin.deleteBooks()).toBe(0);
     });
   });
