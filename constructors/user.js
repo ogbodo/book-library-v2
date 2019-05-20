@@ -24,10 +24,12 @@ class User {
     this.save(); //Save this user to the user database
   }
 
+  //Gets user's first-name
   getFirstName() {
     return this[firstNameSymbole];
   }
 
+  //Gets user's last-name
   getLastName() {
     return this[lastNameSymbole];
   }
@@ -39,6 +41,15 @@ class User {
   //This method saves user to the database
   save() {
     databaseHandler['users'].push(this);
+  }
+
+  //Updates user's details
+  updatePersonalDetails(firstName, lastName, gender, faculty, department) {
+    this[firstNameSymbole] = firstName;
+    this[lastNameSymbole] = lastName;
+    this[genderSymbole] = gender;
+    this[departmentSymbole] = department;
+    this[facultySymbole] = faculty;
   }
 }
 
