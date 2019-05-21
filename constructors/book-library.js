@@ -85,10 +85,24 @@ class BookLibrary {
 
   //This method gets a book
   get(bookId) {
-    var books = this.getBooks(); //Returns the collection of books
+    const books = this.getBooks(); //Returns the collection of books
 
     //Compare each book id with the book id we are interested in and return it when found.
     return books.find(book => book.getId() === bookId);
+  }
+
+  //This method deletes book from the library
+  delete(bookId) {
+    const books = this.getBooks(); //Returns the collection of books
+
+    for (let index in books) {
+      //Compare each book id with the book id we are interested in.
+      if (books[index].getId() === bookId) {
+        books.splice(index, 1); //Using the splice method of Javascript to remove one book at a particular position(i.e at a particular index) of the books collection.
+        return true; //returns true as a response
+      }
+    }
+    return 'Book Not Found'; //returns false as a response if book with such ID does not exist
   }
 }
 module.exports = BookLibrary;

@@ -192,6 +192,11 @@ class Admin extends user {
 
     return borrowedBook; //returns the borrowed book
   }
+
+  //This method deletes a book
+  deleteBook(book) {
+    return bookLibrary.prototype.delete(book);
+  }
 }
 
 module.exports = Admin;

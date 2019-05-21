@@ -331,8 +331,8 @@ describe('All about Admin as the librarian', function() {
             );
 
             expect(
-              admin.lendBook([firstStudent, secondStudent], book.id).userId
-            ).toEqual(firstStudent.id);
+              admin.lendBook([firstStudent, secondStudent], book.getId()).userId
+            ).toEqual(firstStudent.getId());
           });
         });
       });
@@ -364,8 +364,8 @@ describe('All about Admin as the librarian', function() {
 
         test('For the case where two students of different levels demands for a book and its available', function() {
           expect(
-            admin.lendBook([juniorStudent, seniorStudent], book.id).userId
-          ).toEqual(seniorStudent.id);
+            admin.lendBook([juniorStudent, seniorStudent], book.getId()).userId
+          ).toEqual(seniorStudent.getId());
         });
       });
     });
@@ -387,8 +387,8 @@ describe('All about Admin as the librarian', function() {
         );
 
         expect(
-          admin.lendBook([student, teacher, secondTeacher], book.id).userId
-        ).toEqual(teacher.id);
+          admin.lendBook([student, teacher, secondTeacher], book.getId()).userId
+        ).toEqual(teacher.getId());
       });
 
       test('For the case where two student and a teacher demands for a book and its available', function() {
@@ -408,9 +408,9 @@ describe('All about Admin as the librarian', function() {
         );
 
         expect(
-          admin.lendBook([student, seniorStudent, secondTeacher], book.id)
+          admin.lendBook([student, seniorStudent, secondTeacher], book.getId())
             .userId
-        ).toEqual(secondTeacher.id);
+        ).toEqual(secondTeacher.getId());
       });
     });
   });
@@ -422,7 +422,7 @@ describe('All about Admin as the librarian', function() {
         'Literature',
         'Chinuwa Achebe'
       );
-      expect(admin.deleteBook(newBook.id)).toBeTruthy();
+      expect(admin.deleteBook(newBook.getId())).toBeTruthy();
     });
     test('Admin trying to delete a non existing book', function() {
       expect(admin.deleteBook(20)).toBe('Book Not Found');
