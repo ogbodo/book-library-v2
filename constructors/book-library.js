@@ -1,6 +1,6 @@
 const databaseHandler = require('../databases/database'); //Import the database
 const book = require('../constructors/book'); //Import the Book object
-const generateId = require('../helpers/id-generator'); //Import our helper function that generates unique IDs.
+const catalog = require('../constructors/catalog'); //Import our helper function that generates unique IDs.
 
 //Book-Library class definition
 class BookLibrary {
@@ -19,7 +19,7 @@ class BookLibrary {
     this.save(newBook); //Save this book in the book database
 
     this.addBookToCatalog(
-      newBook.id,
+      newBook.getId(),
       newBook.date,
       newBook.title,
       newBook.author
@@ -34,19 +34,14 @@ class BookLibrary {
   }
 
   //This method add books to catalog
-  addBookToCatalog(bookId, dateAdded, title) {
+  addBookToCatalog(bookId, dateAdded, bookTitle) {
     //build the catalog for the current object and save it in the catalog collection
-    let id = Symbol('id');
-    const catalogRecord = {
-      id: generateId(databaseHandler['catalog']), //Generates a new Id for this catalog
-      bookTitle: title,
-      bookId: bookId,
-      dateAdded: dateAdded,
-      //This method returns the book's id
-      getId: function() {
-        return this[id];
-      }
-    };
+    const catalogRecord = new catalog(
+      bookId,
+      dateAdded,
+      bookTitle,
+      databaseHandler['catalog']
+    );
 
     databaseHandler['catalog'].push(catalogRecord); //Adds this newly created catalog record into the catalog collection
   }
@@ -91,9 +86,9 @@ class BookLibrary {
   //This method gets a book
   get(bookId) {
     var books = this.getBooks(); //Returns the collection of books
-    console.log('dsds', bookId);
 
-    let f = books.find(book => book.getId() === bookId);
+    //Compare each book id with the book id we are interested in and return it when found.
+    return books.find(book => book.getId() === bookId);
   }
 }
 module.exports = BookLibrary;

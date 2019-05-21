@@ -249,7 +249,7 @@ describe('All about Admin as the librarian', function() {
     );
 
     test('For the case where admin demands for book and its available', function() {
-      expect(admin.lendBook(admin, book.getId()).userId).toBe(admin.id);
+      expect(admin.lendBook(admin, book.getId()).userId).toBe(admin.getId());
     });
 
     const student = new Student(
@@ -278,7 +278,7 @@ describe('All about Admin as the librarian', function() {
         test('For the case where a student and teacher demands for a book and its available', function() {
           expect(
             admin.lendBook([student, teacher], book.getId()).userId
-          ).toEqual(teacher.id);
+          ).toEqual(teacher.getId());
         });
 
         describe('Priority between teachers', function() {
@@ -299,7 +299,7 @@ describe('All about Admin as the librarian', function() {
             );
 
             expect(
-              admin.lendBook([teacher, secondTeacher], book.id).userId
+              admin.lendBook([teacher, secondTeacher], book.getId()).userId
             ).toEqual(teacher.id);
           });
         });
