@@ -1,5 +1,5 @@
 const user = require('./user'); //Import the User Object
-// const bookLibrary = require('./book-library'); //Import the book library
+const bookLibrary = require('./book-library'); //Import the book library
 // const databaseHandler = require('../database/database'); //Import the database
 // const generateId = require('../helpers/id-generator'); //Import our helper function that generates unique IDs.
 
@@ -103,6 +103,11 @@ class Admin extends user {
     }
 
     return madeDeletion; //Returns the response
+  }
+
+  //This method adds book to the library
+  addBook(title, category, author) {
+    return bookLibrary.prototype.create(title, category, author);
   }
 }
 

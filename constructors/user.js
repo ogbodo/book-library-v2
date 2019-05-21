@@ -13,15 +13,16 @@ class User {
     this.department = department;
     this.faculty = faculty;
 
-    this[id] = generateId(this.getUsers()); //Generates a new Id for this book
+    this[id] = generateId(this.getUsers()); //Generates a new Id for this User
 
     this.save(); //Save this user to the user database
   }
 
-  //Gets user's last-name
+  //Gets user's Id
   getId(user = this) {
     return user[id];
   }
+
   //this method gets all users
   getUsers() {
     return databaseHandler['users'];
