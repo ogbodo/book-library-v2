@@ -53,15 +53,22 @@ class User {
 
   //Enables user to delete own account
   delete() {
-    var users = this.getUsers(); //Returns the collection of Users
+    const users = this.getUsers(); //Returns the collection of Users
+
     for (let index in users) {
       //Compare each user-Id with the user Id we are interested in.
-
       if (users[index].id === this.id) {
         users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
+
         return true; //returns true as a response
       }
     }
+  }
+
+  //Gets user's information as an object
+  retrieveDetails() {
+    const users = this.getUsers(); //Returns the collection of Users
+    return users.find(user => user.id === this.id);
   }
 }
 
