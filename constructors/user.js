@@ -7,7 +7,6 @@ let genderSymbole = Symbol('gender');
 let userTypeSymbole = Symbol('userType');
 let departmentSymbole = Symbol('department');
 let facultySymbole = Symbol('faculty');
-let idSymbole = Symbol('id');
 
 class User {
   //User constructor definition
@@ -19,7 +18,7 @@ class User {
     this[departmentSymbole] = department;
     this[facultySymbole] = faculty;
 
-    this[idSymbole] = generateId(this.getUsers()); //Generates a new Id for this book
+    this.id = generateId(this.getUsers()); //Generates a new Id for this book
 
     this.save(); //Save this user to the user database
   }
@@ -50,6 +49,19 @@ class User {
     this[genderSymbole] = gender;
     this[departmentSymbole] = department;
     this[facultySymbole] = faculty;
+  }
+
+  //Enables user to delete own account
+  delete() {
+    var users = this.getUsers(); //Returns the collection of Users
+    for (let index in users) {
+      //Compare each user-Id with the user Id we are interested in.
+
+      if (users[index].id === this.id) {
+        users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
+        return true; //returns true as a response
+      }
+    }
   }
 }
 
