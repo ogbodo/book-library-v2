@@ -1,6 +1,5 @@
 const user = require('./user'); //Import the User Object
 // const bookLibrary = require('./book-library'); //Import the book library
-const inheritProperty = require('../helpers/inherit-property'); //Import for this object to enable inheritance
 // const databaseHandler = require('../database/database'); //Import the database
 // const generateId = require('../helpers/id-generator'); //Import our helper function that generates unique IDs.
 
@@ -28,6 +27,18 @@ class Admin extends user {
     );
 
     return results.length === 0 ? false : results; //Returns false if no result found else returns true
+  }
+
+  //This method returns all teachers
+  getAllTeachers() {
+    return this.getUserSets('TEACHER');
+  }
+
+  //This method retrieves users based on their user type: Teachers, Students or Admins
+  getUserSets(userType) {
+    const users = Admin.prototype.getUsers(); //Returns the collection of Users
+
+    return users.filter(user => user.userType === userType); //FFilter users id with the user id we are interested in and return them.
   }
 }
 

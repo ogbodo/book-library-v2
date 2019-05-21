@@ -7,7 +7,7 @@ describe('All about Admin own account functionalities', function() {
   test('Admin can be created', function() {
     var admin = new Admin('Izuking', 'Ogbodo', 'Male');
 
-    expect(admin.getFirstName()).toBe('Izuking');
+    expect(admin.firstName).toBe('Izuking');
   });
 
   describe('Admin details can be updated', function() {
@@ -15,8 +15,8 @@ describe('All about Admin own account functionalities', function() {
 
     test('For the case of personal details', function() {
       admin.updatePersonalDetails('Natasha', 'Ade');
-      expect(admin.getFirstName()).toBe('Natasha');
-      expect(admin.getLastName()).toBe('Ade');
+      expect(admin.firstName).toBe('Natasha');
+      expect(admin.lastName).toBe('Ade');
     });
   });
 
@@ -37,6 +37,14 @@ describe('All about Admin and other users', function() {
     var admin = new Admin('Matthias', ' Ogbonna', 'Male');
 
     test('For the case of Admin to get all teachers', function() {
+      new Teacher(
+        'Bamidele',
+        'Olamide',
+        'Dev/12/310',
+        'Male',
+        'Social Science',
+        'Political Science'
+      );
       expect(admin.getAllTeachers()).toBeTruthy();
     });
 

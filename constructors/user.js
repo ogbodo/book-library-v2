@@ -1,36 +1,26 @@
 const databaseHandler = require('../databases/database'); //Import the database
 const generateId = require('../helpers/id-generator'); //Import our helper function that generates unique IDs.
 
-let firstNameSymbole = Symbol('firstName');
-let lastNameSymbole = Symbol('lastName');
-let genderSymbole = Symbol('gender');
-let userTypeSymbole = Symbol('userType');
-let departmentSymbole = Symbol('department');
-let facultySymbole = Symbol('faculty');
+let id = Symbol('id');
 
 class User {
   //User constructor definition
   constructor(firstName, lastName, gender, userType, faculty, department) {
-    this[firstNameSymbole] = firstName;
-    this[lastNameSymbole] = lastName;
-    this[genderSymbole] = gender;
-    this[userTypeSymbole] = userType;
-    this[departmentSymbole] = department;
-    this[facultySymbole] = faculty;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.userType = userType;
+    this.department = department;
+    this.faculty = faculty;
 
-    this.id = generateId(this.getUsers()); //Generates a new Id for this book
+    this[id] = generateId(this.getUsers()); //Generates a new Id for this book
 
     this.save(); //Save this user to the user database
   }
 
-  //Gets user's first-name
-  getFirstName() {
-    return this[firstNameSymbole];
-  }
-
   //Gets user's last-name
-  getLastName() {
-    return this[lastNameSymbole];
+  getId(user = this) {
+    return user[id];
   }
   //this method gets all users
   getUsers() {
@@ -44,11 +34,11 @@ class User {
 
   //Updates user's details
   updatePersonalDetails(firstName, lastName, gender, faculty, department) {
-    this[firstNameSymbole] = firstName;
-    this[lastNameSymbole] = lastName;
-    this[genderSymbole] = gender;
-    this[departmentSymbole] = department;
-    this[facultySymbole] = faculty;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.gender = gender;
+    this.department = department;
+    this.faculty = faculty;
   }
 
   //Enables user to delete own account
@@ -57,7 +47,7 @@ class User {
 
     for (let index in users) {
       //Compare each user-Id with the user Id we are interested in.
-      if (users[index].id === this.id) {
+      if (users[index].getId() === this.getId()) {
         users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
 
         return true; //returns true as a response
@@ -68,7 +58,7 @@ class User {
   //Gets user's information as an object
   retrieveDetails() {
     const users = this.getUsers(); //Returns the collection of Users
-    return users.find(user => user.id === this.id);
+    return users.find(user => user.getId() === this.getId());
   }
 }
 
