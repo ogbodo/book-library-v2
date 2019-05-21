@@ -276,9 +276,9 @@ describe('All about Admin as the librarian', function() {
         const book = admin.addBook('Security Tips', 'Article', 'Ben Mark');
 
         test('For the case where a student and teacher demands for a book and its available', function() {
-          expect(admin.lendBook([student, teacher], book.id).userId).toEqual(
-            teacher.id
-          );
+          expect(
+            admin.lendBook([student, teacher], book.getId()).userId
+          ).toEqual(teacher.id);
         });
 
         describe('Priority between teachers', function() {
