@@ -300,7 +300,7 @@ describe('All about Admin as the librarian', function() {
 
             expect(
               admin.lendBook([teacher, secondTeacher], book.getId()).userId
-            ).toEqual(teacher.id);
+            ).toEqual(teacher.getId());
           });
         });
 
