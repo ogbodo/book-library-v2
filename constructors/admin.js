@@ -48,7 +48,19 @@ class Admin extends user {
   getUserSets(userType) {
     const users = Admin.prototype.getUsers(); //Returns the collection of Users
 
-    return users.filter(user => user.userType === userType); //FFilter users id based on the id we are interested in and return them.
+    return users.filter(user => user.userType === userType); //Filter users id based on the id we are interested in and return them.
+  }
+
+  //This method reads a student
+  readStudent(matricNumber) {
+    const users = this.getUsers(); //Returns the collection of Users
+    return users.find(user => user.matricNumber === matricNumber); //Compare each user matric number with the matric number we are interested in and return it.
+  }
+
+  //This method reads a teacher
+  readTeacher(staffId) {
+    const users = this.getUsers(); //Returns the collection of Users
+    return users.find(user => user.staffId === staffId); //Compare each user staff id with the staff id we are interested in and return it.
   }
 }
 
