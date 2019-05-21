@@ -62,6 +62,42 @@ class Admin extends user {
     const users = this.getUsers(); //Returns the collection of Users
     return users.find(user => user.staffId === staffId); //Compare each user staff id with the staff id we are interested in and return it.
   }
+
+  //This method deletes a user
+  deleteUser(userId) {
+    const users = this.getUsers(); //Returns the collection of Users
+
+    for (let index in users) {
+      if (users[index].getId() === userId) {
+        console.log(users[index].getId());
+
+        users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
+        return true; //returns true as a response
+      }
+    }
+    return 'User Not Found'; //returns user not found if user with such ID does not exist
+  }
+
+  //This method deletes all teachers
+  deleteAllTeachers() {
+    return this.deleteUsers('TEACHER');
+  }
+
+  //This method deletes users based on their user type: Teachers, Students or Admins
+  deleteUsers(userType) {
+    const users = Admin.prototype.getUsers(); //Returns the collection of Users
+    let madeDeletion = false;
+
+    for (let index in users) {
+      //Compare each user-type with the user type we are interested in.
+      if (users[index].userType === userType) {
+        users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the User collection.
+        madeDeletion = true; // sets true as a response
+      }
+    }
+
+    return madeDeletion; //Returns the response
+  }
 }
 
 module.exports = Admin;
