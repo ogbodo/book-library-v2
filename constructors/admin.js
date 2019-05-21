@@ -111,6 +111,11 @@ class Admin extends user {
   updateBookTitle(book, newTitle) {
     return bookLibrary.prototype.updateTitle(book, newTitle);
   }
+
+  //This method gets all  books
+  getAllBooks() {
+    return bookLibrary.prototype.getBooks();
+  }
 }
 
 module.exports = Admin;

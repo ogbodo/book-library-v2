@@ -54,7 +54,6 @@ class BookLibrary {
   //This method updates book title
   updateTitle(bookArg, newTitle) {
     const books = this.getBooks(); //Returns the collection of books
-
     for (let book of books) {
       //Compare each book id with the book id we are interested in.
       if (book.getId() === bookArg.getId()) {
