@@ -67,5 +67,33 @@ class BookLibrary {
   getBooks() {
     return databaseHandler['books']; //Gets the collection of books from the database.
   }
+
+  //This method takes record of book borrowed by users
+  recordBookRelease(bookId) {
+    return this.removeBookFromCatalog(bookId); //Gets the particular catalog record of a book
+  }
+
+  //Removes book from catalog
+  removeBookFromCatalog(bookId) {
+    const catalogs = databaseHandler['catalog']; //Retrieves catalog collection from the database
+
+    for (let index in catalogs) {
+      //Compare each book id with the book id we are interested in.
+      if (catalogs[index].bookId === bookId) {
+        catalogs.splice(index, 1); //This line removes one book from the catalog.
+        return true; //Returns true for successful operation
+      }
+    }
+
+    return false; //Returns false for unsuccessful operation
+  }
+
+  //This method gets a book
+  get(bookId) {
+    var books = this.getBooks(); //Returns the collection of books
+    console.log('dsds', bookId);
+
+    let f = books.find(book => book.getId() === bookId);
+  }
 }
 module.exports = BookLibrary;

@@ -249,7 +249,7 @@ describe('All about Admin as the librarian', function() {
     );
 
     test('For the case where admin demands for book and its available', function() {
-      expect(admin.lendBook(admin, book.id).userId).toBe(admin.id);
+      expect(admin.lendBook(admin, book.getId()).userId).toBe(admin.id);
     });
 
     const student = new Student(
