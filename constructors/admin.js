@@ -14,15 +14,15 @@ class Admin extends user {
   getUserByID(id) {
     const users = this.getUsers(); //Returns the collection of Users
 
-    return users.find(user => user.id === id); //Compare each user id with the user id we are interested in and return it.
+    return users.find(user => user.getId() === id); //Compare each user id with the user id we are interested in and return it.
   }
 
   //Get all users with same either first-name or last-name
   searchUserByName(name) {
     const users = this.getUsers(); //Returns the collection of Users
 
-    //Compare each user id with the user id we are interested in.
-    let results = users.map(
+    //Filter each user name based on the name we are interested in.
+    const results = users.filter(
       user => user.firstName === name || user.lastName === name
     );
 
@@ -39,11 +39,16 @@ class Admin extends user {
     return this.getUserSets('STUDENT');
   }
 
+  //This method returns all admins
+  getAllAdmins() {
+    return this.getUserSets('ADMIN');
+  }
+
   //This method retrieves users based on their user type: Teachers, Students or Admins
   getUserSets(userType) {
     const users = Admin.prototype.getUsers(); //Returns the collection of Users
 
-    return users.filter(user => user.userType === userType); //FFilter users id with the user id we are interested in and return them.
+    return users.filter(user => user.userType === userType); //FFilter users id based on the id we are interested in and return them.
   }
 }
 

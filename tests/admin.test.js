@@ -84,15 +84,11 @@ describe('All about Admin and other users', function() {
     );
 
     test('For the case student by id', function() {
-      expect(admin.getUserByID(student.id)).toEqual(student);
+      expect(admin.getUserByID(student.getId())).toEqual(student);
     });
 
     test('For the case teacher by id', function() {
-      expect(admin.getUserByID(teacher.id)).toEqual(teacher);
-    });
-
-    test('For the case student by id', function() {
-      expect(admin.getUserByID(student.id)).toEqual(student);
+      expect(admin.getUserByID(teacher.getId())).toEqual(teacher);
     });
 
     test('For the case of wrong id', function() {
