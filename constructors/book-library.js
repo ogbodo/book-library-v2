@@ -37,18 +37,36 @@ class BookLibrary {
   addBookToCatalog(bookId, dateAdded, title) {
     //build the catalog for the current object and save it in the catalog collection
     let id = Symbol('id');
-
     const catalogRecord = {
       id: generateId(databaseHandler['catalog']), //Generates a new Id for this catalog
       bookTitle: title,
       bookId: bookId,
       dateAdded: dateAdded,
+      //This method returns the book's id
       getId: function() {
         return this[id];
       }
     };
 
     databaseHandler['catalog'].push(catalogRecord); //Adds this newly created catalog record into the catalog collection
+  }
+
+  //This method updates book title
+  updateTitle(bookArg, newTitle) {
+    const books = this.getBooks(); //Returns the collection of books
+
+    for (let book of books) {
+      //Compare each book id with the book id we are interested in.
+      if (book.getId() === bookArg.getId()) {
+        book.title = newTitle; //Performs the update here
+        return book; //Returns the updated book.
+      }
+    }
+  }
+
+  //This method returns all books
+  getBooks() {
+    return databaseHandler['books']; //Gets the collection of books from the database.
   }
 }
 module.exports = BookLibrary;

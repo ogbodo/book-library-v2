@@ -69,8 +69,6 @@ class Admin extends user {
 
     for (let index in users) {
       if (users[index].getId() === userId) {
-        console.log(users[index].getId());
-
         users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
         return true; //returns true as a response
       }
@@ -108,6 +106,10 @@ class Admin extends user {
   //This method adds book to the library
   addBook(title, category, author) {
     return bookLibrary.prototype.create(title, category, author);
+  }
+  //This method updates book by title
+  updateBookTitle(book, newTitle) {
+    return bookLibrary.prototype.updateTitle(book, newTitle);
   }
 }
 
