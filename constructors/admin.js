@@ -34,6 +34,11 @@ class Admin extends user {
     return this.getUserSets('TEACHER');
   }
 
+  //This method returns all students
+  getAllStudents() {
+    return this.getUserSets('STUDENT');
+  }
+
   //This method retrieves users based on their user type: Teachers, Students or Admins
   getUserSets(userType) {
     const users = Admin.prototype.getUsers(); //Returns the collection of Users
