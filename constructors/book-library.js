@@ -104,5 +104,12 @@ class BookLibrary {
     }
     return 'Book Not Found'; //returns false as a response if book with such ID does not exist
   }
+
+  //This method deletes all books
+  deleteAll() {
+    const books = this.getBooks(); //Returns the collection of books
+    books.splice(0); //Using the splice method of Javascript to remove books from start to end(i.e from index 0 to last index) of the books collection.
+    return books.length; //Returns the new length of the collection of books (which obviously will be 0 at this point)
+  }
 }
 module.exports = BookLibrary;

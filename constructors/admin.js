@@ -197,6 +197,11 @@ class Admin extends user {
   deleteBook(book) {
     return bookLibrary.prototype.delete(book);
   }
+
+  //This method deletes all books
+  deleteBooks() {
+    return bookLibrary.prototype.deleteAll();
+  }
 }
 
 module.exports = Admin;
