@@ -198,7 +198,7 @@ describe('All about Admin and other users', function() {
 
     describe('For the case where admin wants to delete users when none exists', function() {
       test('For the case of deleting all student', function() {
-        expect(admin.deleteAllStudents()).toBeTruthy();
+        expect(admin.deleteAllStudents()).toBeFalsy();
       });
 
       test('For the case of deleting all teacher', function() {
