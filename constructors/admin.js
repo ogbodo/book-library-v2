@@ -83,6 +83,11 @@ class Admin extends user {
     return this.deleteUsers('TEACHER');
   }
 
+  //This method deletes all students
+  deleteAllStudents() {
+    return this.deleteUsers('STUDENT');
+  }
+
   //This method deletes users based on their user type: Teachers, Students or Admins
   deleteUsers(userType) {
     const users = Admin.prototype.getUsers(); //Returns the collection of Users
