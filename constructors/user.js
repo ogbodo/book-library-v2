@@ -2,6 +2,7 @@ const databaseHandler = require('../databases/database'); //Import the database
 const generateId = require('../helpers/id-generator'); //Import our helper function that generates unique IDs.
 
 let id = Symbol('id');
+let isActive = Symbol('active');
 
 class User {
   //User constructor definition
@@ -12,8 +13,9 @@ class User {
     this.userType = userType;
     this.department = department;
     this.faculty = faculty;
+    this[isActive] = true;
 
-    this[id] = generateId(this.getUsers()); //Generates a new Id for this User
+    this[id] = generateId(databaseHandler['users']); //Generates a new Id for this User
 
     this.save(); //Save this user to the user database
   }
@@ -23,9 +25,14 @@ class User {
     return user[id];
   }
 
-  //this method gets all users
-  getUsers() {
-    return databaseHandler['users'];
+  //Gets user's active status
+  getActiveStatus(user = this) {
+    return user[isActive];
+  }
+
+  //changes user's active status to false
+  changeActiveStatus() {
+    return (this[isActive] = false);
   }
 
   //This method saves user to the database
@@ -34,7 +41,13 @@ class User {
   }
 
   //Updates user's details
-  updatePersonalDetails(firstName, lastName, gender, faculty, department) {
+  updatePersonalDetails(
+    firstName = this.firstName,
+    lastName = this.lastName,
+    gender = this.gender,
+    faculty = this.faculty,
+    department = this.department
+  ) {
     this.firstName = firstName;
     this.lastName = lastName;
     this.gender = gender;
@@ -59,6 +72,7 @@ class User {
   //Gets user's information as an object
   retrieveDetails() {
     const users = this.getUsers(); //Returns the collection of Users
+
     return users.find(user => user.getId() === this.getId());
   }
 }

@@ -16,7 +16,10 @@ class Admin extends user {
 
     return users.find(user => user.getId() === id); //Compare each user id with the user id we are interested in and return it.
   }
-
+  //This method returns all users
+  getUsers() {
+    return databaseHandler['users'];
+  }
   //Get all users with same either first-name or last-name
   searchUserByName(name) {
     const users = this.getUsers(); //Returns the collection of Users
@@ -38,10 +41,16 @@ class Admin extends user {
   getAllStudents() {
     return this.getUserSets('STUDENT');
   }
-
   //This method returns all admins
   getAllAdmins() {
     return this.getUserSets('ADMIN');
+  }
+  //This method returns all users (students and teachers)
+  getAllUsers() {
+    return [
+      ...this.getUserSets('TEACHER'),
+      ...this.getUserSets('STUDENT')
+    ].filter(user => user.getActiveStatus() === true);
   }
 
   //This method retrieves users based on their user type: Teachers, Students or Admins
@@ -69,7 +78,8 @@ class Admin extends user {
 
     for (let index in users) {
       if (users[index].getId() === userId) {
-        users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
+        // users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the users collection.
+        users.splice(index, 1);
         return true; //returns true as a response
       }
     }
@@ -85,22 +95,23 @@ class Admin extends user {
   deleteAllStudents() {
     return this.deleteUsers('STUDENT');
   }
-
+  deleteNow(i, users) {
+    users.splice(i, 1);
+    console.log(' users.splice(index, 1)');
+  }
   //This method deletes users based on their user type: Teachers, Students or Admins
   deleteUsers(userType) {
-    const users = Admin.prototype.getUsers(); //Returns the collection of Users
+    const users = this.getUsers(); //Returns the collection of Users
+    let wasDeletionMade = false;
 
-    let madeDeletion = false;
-
-    for (let index in users) {
-      //Compare each user-type with the user type we are interested in.
-      if (users[index].userType === userType) {
-        users.splice(index, 1); //Using the splice method of Javascript to remove one user at a particular position(i.e at a particular index) of the User collection.
-        madeDeletion = true; // sets true as a response
+    users.forEach(user => {
+      if (user.userType === userType && user.getActiveStatus()) {
+        user.changeActiveStatus();
+        wasDeletionMade = true;
       }
-    }
+    });
 
-    return madeDeletion; //Returns the response
+    return wasDeletionMade; //Returns the response
   }
 
   //This method adds book to the library
@@ -108,8 +119,41 @@ class Admin extends user {
     return bookLibrary.prototype.create(title, category, author);
   }
   //This method updates book by title
-  updateBookTitle(book, newTitle) {
-    return bookLibrary.prototype.updateTitle(book, newTitle);
+  updateBookDetails(book, title, category, author) {
+    let updatedBook = bookLibrary.prototype.updateBook(
+      book,
+      title,
+      category,
+      author
+    );
+
+    //Check if the update went well
+    if (updatedBook.title !== title) {
+      //Return an error message
+      return updatedBook;
+    }
+
+    let result = this.updateCollectorList(updatedBook); //Finally, apply this changes on all copies of this book in catalog record
+
+    return result ? result : updatedBook; //Return the updated book if update went well else return the result value
+  }
+
+  //this method updates the collectors list
+  updateCollectorList(updatedBook) {
+    let response = false;
+
+    //Iterate through the collectors
+    for (let collector of databaseHandler['collectors']) {
+      //Compare each collectors bookId with the id we are interested
+      if (updatedBook.getId() === collector.bookId) {
+        //Update every copies with the id we are interested
+        collector.updateCollector(updatedBook.title, updatedBook.author);
+
+        response = true;
+      }
+    }
+
+    return response; //Return the update response
   }
 
   //This method gets all  books

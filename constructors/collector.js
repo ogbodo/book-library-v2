@@ -17,5 +17,11 @@ class Collector {
   getId(collector = this) {
     return collector[id];
   }
+
+  //This method updates collector details
+  updateCollector(bookTitle = this.bookTitle, author = this.author) {
+    this.bookTitle = bookTitle;
+    this.author = author;
+  }
 }
 module.exports = Collector; //Make this class available for external use by importation

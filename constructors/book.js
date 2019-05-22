@@ -17,5 +17,20 @@ class Book {
   getId(book = this) {
     return book[id];
   }
+
+  //This method updates book details
+  update(
+    title = this.title,
+    category = this.category,
+    author = this.author,
+    dateUpdated
+  ) {
+    this.title = title;
+    this.category = category;
+    this.author = author;
+    this.date = dateUpdated;
+
+    return this;
+  }
 }
 module.exports = Book; //Make this class available for external use by importation

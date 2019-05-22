@@ -34,28 +34,51 @@ class BookLibrary {
   }
 
   //This method add books to catalog
-  addBookToCatalog(bookId, dateAdded, bookTitle) {
+  addBookToCatalog(id, date, title) {
     //build the catalog for the current object and save it in the catalog collection
     const catalogRecord = new catalog(
-      bookId,
-      dateAdded,
-      bookTitle,
+      id,
+      date,
+      title,
       databaseHandler['catalog']
     );
 
     databaseHandler['catalog'].push(catalogRecord); //Adds this newly created catalog record into the catalog collection
   }
 
-  //This method updates book title
-  updateTitle(bookArg, newTitle) {
-    const books = this.getBooks(); //Returns the collection of books
-    for (let book of books) {
-      //Compare each book id with the book id we are interested in.
-      if (book.getId() === bookArg.getId()) {
-        book.title = newTitle; //Performs the update here
-        return book; //Returns the updated book.
+  updateCatalog(updatedBook) {
+    let response;
+    //Iterate through the catalog
+    for (let catalog of databaseHandler['catalog']) {
+      //Compare each catalog bookId with the id we are interested
+      if (updatedBook.getId() === catalog.bookId) {
+        //Update every copies with the id we are interested
+        catalog.updateCatalog(updatedBook.title, updatedBook.date);
+        response = true;
       }
     }
+    return response; //Return the update response
+  }
+
+  //This method updates book title
+  updateBook(bookToBeUpdated, title, category, author) {
+    let updatedBook = bookToBeUpdated.update(
+      title,
+      category,
+      author,
+      new Date().toLocaleDateString()
+    );
+    let isUpdateSuccessful = this.updateCatalog(updatedBook); //Apply this changes on all copies of this book in catalog record
+
+    //Check if the update went well
+    if (!isUpdateSuccessful) {
+      //Return an error message
+      return `Unable to update catalog, maybe ${
+        bookToBeUpdated.title
+      } was not cataloged`;
+    }
+
+    return updatedBook;
   }
 
   //This method returns all books
@@ -102,7 +125,7 @@ class BookLibrary {
         return true; //returns true as a response
       }
     }
-    return 'Book Not Found'; //returns false as a response if book with such ID does not exist
+    return `Book Not Found`; //returns false as a response if book with such ID does not exist
   }
 
   //This method deletes all books
