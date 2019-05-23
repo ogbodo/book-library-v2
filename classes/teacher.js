@@ -28,5 +28,9 @@ class Teacher extends user {
     );
     this.staffId = staffId;
   }
+  //This method enables student to borrow book
+  borrowBook(bookId) {
+    return admin.prototype.lendBook(this, bookId);
+  }
 }
 module.exports = Teacher;

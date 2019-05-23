@@ -45,7 +45,7 @@ describe('All about Teacher own account functionalities', function() {
 
 describe('Teacher borrowing book', function() {
   test('For the case where a teacher demands for book and its available', function() {
-    expect(teacher.borrowBook(book1.getId()).userId).toBe(teacher.id);
+    expect(teacher.borrowBook(book1.getId()).userId).toBe(teacher.getId());
   });
 
   test('For the case where same teacher demands for another book and its available', function() {
