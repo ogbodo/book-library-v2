@@ -19,12 +19,7 @@ class Book {
   }
 
   //This method updates book details
-  update(
-    title = this.title,
-    category = this.category,
-    author = this.author,
-    dateUpdated
-  ) {
+  update(title, category, author, dateUpdated) {
     this.title = title;
     this.category = category;
     this.author = author;

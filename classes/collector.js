@@ -19,7 +19,7 @@ class Collector {
   }
 
   //This method updates collector details
-  updateCollector(bookTitle = this.bookTitle, author = this.author) {
+  updateCollector(bookTitle, author) {
     this.bookTitle = bookTitle;
     this.author = author;
   }

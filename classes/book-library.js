@@ -56,7 +56,7 @@ class BookLibrary {
       //Compare each catalog bookId with the id we are interested
       if (updatedBook.getId() === catalog.bookId) {
         //Update every copies with the id we are interested
-        catalog.update(updatedBook.title, updatedBook.date);
+        catalog.update(updatedBook.title, updatedBook.author, updatedBook.date);
         return updatedBook; //return the updated book immediately
       }
     }

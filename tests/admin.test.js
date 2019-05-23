@@ -64,6 +64,13 @@ describe('All about Admin own account functionalities', () => {
       expect(admin.firstName).toBe('Natasha');
       expect(admin.lastName).toBe('Ade');
     });
+
+    test('For the case of personal details updated with no argument', () => {
+      //Everything remains the-same
+      admin.updatePersonalDetails();
+      expect(admin.firstName).toBe('Natasha');
+      expect(admin.lastName).toBe('Ade');
+    });
   });
 
   test('Admin details can be read', () => {

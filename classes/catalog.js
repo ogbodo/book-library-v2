@@ -18,7 +18,7 @@ class Catalog {
   }
 
   //This method updates catalog details
-  update(title = this.title, date = this.date, author = this.author) {
+  update(title, author, date) {
     this.title = title;
     this.date = date;
     this.author = author;
