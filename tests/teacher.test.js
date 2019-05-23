@@ -57,7 +57,7 @@ describe('Teacher borrowing book', function() {
   });
 
   test('For the case where teacher wants to return a book', function() {
-    expect(teacher.returnBorrowedbook(book2.id)).toBeTruthy();
+    expect(teacher.returnBorrowedbook(book2.getId())).toBeTruthy();
   });
 });
 
