@@ -49,7 +49,7 @@ describe('Teacher borrowing book', function() {
   });
 
   test('For the case where same teacher demands for another book and its available', function() {
-    expect(teacher.borrowBook(book2.id).userId).toBe(teacher.id);
+    expect(teacher.borrowBook(book2.getId()).userId).toBe(teacher.getId());
   });
 
   test('For the case where same teacher demands for another copy of same book but its unavailable', function() {
