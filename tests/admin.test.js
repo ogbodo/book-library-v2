@@ -49,14 +49,6 @@ const secondTeacher = new Teacher(
   'Science',
   'Agric'
 );
-const secondTeacher3 = new Teacher(
-  'Ayo',
-  'James',
-  'Dev/61/223',
-  'Male',
-  'Science',
-  'Agric'
-);
 
 //Functionalities of Admin with respect to own account
 describe('All about Admin own account functionalities', function() {
