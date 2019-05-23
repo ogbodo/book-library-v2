@@ -1,6 +1,6 @@
 const databaseHandler = require('../databases/database'); //Import the database
-const book = require('../constructors/book'); //Import the Book object
-const catalog = require('../constructors/catalog'); //Import our helper function that generates unique IDs.
+const book = require('../classes/book'); //Import the Book object
+const catalog = require('../classes/catalog'); //Import our helper function that generates unique IDs.
 
 //Book-Library class definition
 class BookLibrary {

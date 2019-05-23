@@ -1,7 +1,7 @@
 const user = require('./user'); //Import the User Object
 const bookLibrary = require('./book-library'); //Import the book library
 const databaseHandler = require('../databases/database'); //Import the database
-const collector = require('../constructors/collector'); //Import our helper function that generates unique IDs.
+const collector = require('../classes/collector'); //Import our helper function that generates unique IDs.
 
 //Make Admin to inherit from User by using the extends key word
 class Admin extends user {

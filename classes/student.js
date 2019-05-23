@@ -13,7 +13,29 @@ class Student extends user {
     department,
     level
   ) {
-    super(firstName, lastName, gender, 'STUDENT', faculty, department); //To enable proper inheritance
+    super(firstName, lastName, gender, 'STUDENT', faculty, department); //Call the parent constructor with the required arguments
+    this.level = level;
+    this.matricNumber = matricNumber;
+  }
+
+  //Updates user's details
+  updatePersonalDetails(
+    firstName = this.firstName,
+    lastName = this.lastName,
+    gender = this.gender,
+    faculty = this.faculty,
+    department = this.department,
+    matricNumber = this.matricNumber,
+    level = this.level
+  ) {
+    //all the parent updatePersonalDetails method with the required arguments
+    super.updatePersonalDetails(
+      firstName,
+      lastName,
+      gender,
+      faculty,
+      department
+    );
     this.level = level;
     this.matricNumber = matricNumber;
   }
