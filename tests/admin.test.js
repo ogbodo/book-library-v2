@@ -152,19 +152,24 @@ describe('All about Admin as a librarian', () => {
     admin.addBook('Chike the River', 'Literature', 'Chinuwa Achebe');
 
     test('Admin can get all books', () => {
-      expect(admin.getAllBooks().length).toBe(5);
+      expect(admin.getAllBooks().length).toBe(6);
     });
   });
 
-  test('Admin can update a book detials', () => {
-    const newBook = admin.addBook(
-      'Chike the River',
-      'Literature',
-      'Chinuwa Achebe'
-    );
-    expect(admin.updateBookDetails(newBook, 'What I Need').title).toBe(
-      'What I Need'
-    );
+  describe('For the case where admin updates a book detail which has been borrowed', () => {
+    const book = admin.addBook('The Cup', 'myth', 'Chichi Anita');
+
+    test('For the case where a teacher demands for book and its available', () => {
+      expect(teacher.borrowBook(book.getId()).bookTitle).toBe('The Cup');
+    });
+
+    test('Admin can update a book detials', () => {
+      expect(admin.updateBookDetails(book, 'What I Need').title).toBe(
+        'What I Need'
+      );
+      //Now the borrowed book details has being updated accordingly
+      expect(book.title).toBe('What I Need');
+    });
   });
 
   describe('Admin can perform lending of books', () => {

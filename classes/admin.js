@@ -92,10 +92,7 @@ class Admin extends user {
   deleteAllStudents() {
     return this.deleteUsers('STUDENT');
   }
-  deleteNow(i, users) {
-    users.splice(i, 1);
-    console.log(' users.splice(index, 1)');
-  }
+
   //This method deletes users based on their user type: Teachers, Students or Admins
   deleteUsers(userType) {
     const users = this.getUsers(); //Returns the collection of Users
@@ -115,6 +112,7 @@ class Admin extends user {
   addBook(title, category, author) {
     return bookLibrary.prototype.create(title, category, author);
   }
+
   //This method updates book by title
   updateBookDetails(book, title, category, author) {
     let updatedBook = bookLibrary.prototype.updateBook(
@@ -124,33 +122,7 @@ class Admin extends user {
       author
     );
 
-    //Check if the update went well
-    if (updatedBook.title !== title) {
-      //Return an error message
-      return updatedBook;
-    }
-
-    let result = this.updateCollectorList(updatedBook); //Finally, apply this changes on all copies of this book in catalog record
-
-    return result ? result : updatedBook; //Return the updated book if update went well else return the result value
-  }
-
-  //this method updates the collectors list
-  updateCollectorList(updatedBook) {
-    let response = false;
-
-    //Iterate through the collectors
-    for (let collector of databaseHandler['collectors']) {
-      //Compare each collectors bookId with the id we are interested
-      if (updatedBook.getId() === collector.bookId) {
-        //Update every copies with the id we are interested
-        collector.updateCollector(updatedBook.title, updatedBook.author);
-
-        response = true;
-      }
-    }
-
-    return response; //Return the update response
+    return updatedBook; //Return the updated book
   }
 
   //This method gets all  books

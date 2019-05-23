@@ -34,18 +34,20 @@ class BookLibrary {
   }
 
   //This method add books to catalog
-  addBookToCatalog(id, date, title) {
+  addBookToCatalog(id, date, title, author) {
     //build the catalog for the current object and save it in the catalog collection
     const catalogRecord = new catalog(
       id,
       date,
       title,
+      author,
       databaseHandler['catalog']
     );
 
     databaseHandler['catalog'].push(catalogRecord); //Adds this newly created catalog record into the catalog collection
   }
 
+  //This Method updates the catalog record
   updateCatalog(updatedBook) {
     let response;
     //Iterate through the catalog
@@ -53,32 +55,76 @@ class BookLibrary {
       //Compare each catalog bookId with the id we are interested
       if (updatedBook.getId() === catalog.bookId) {
         //Update every copies with the id we are interested
-        catalog.updateCatalog(updatedBook.title, updatedBook.date);
-        response = true;
+        catalog.update(updatedBook.title, updatedBook.date);
+        return true; //return from here
       }
     }
+
+    //At this point the book has been borrowed out to a user.
+
     return response; //Return the update response
+  }
+
+  //This Method updates the catalog record
+  updateCatalog(updatedBook) {
+    //Iterate through the catalog
+    for (let catalog of databaseHandler['catalog']) {
+      //Compare each catalog bookId with the id we are interested
+      if (updatedBook.getId() === catalog.bookId) {
+        //Update every copies with the id we are interested
+        catalog.update(updatedBook.title, updatedBook.date);
+        return updatedBook; //return the updated book immediately
+      }
+    }
+
+    //At this point the book has been borrowed out to a user.
+
+    return false; //Return false as response
   }
 
   //This method updates book title
   updateBook(bookToBeUpdated, title, category, author) {
-    let updatedBook = bookToBeUpdated.update(
+    let isUpdateSuccessful = this.updateCatalog(bookToBeUpdated); //First make changes on all copies of this book in catalog record
+
+    //Check if the update went well
+    if (!isUpdateSuccessful) {
+      isUpdateSuccessful = this.updateCollectorList(bookToBeUpdated); //Finally, apply this changes on all copies of this book in catalog record
+    }
+
+    if (!isUpdateSuccessful) {
+      //Return an error message
+      return `Unable to update catalog, maybe '${
+        bookToBeUpdated.title
+      }' was not cataloged`;
+    }
+
+    //Now go ahead to update book itself
+    bookToBeUpdated.update(
       title,
       category,
       author,
       new Date().toLocaleDateString()
     );
-    let isUpdateSuccessful = this.updateCatalog(updatedBook); //Apply this changes on all copies of this book in catalog record
 
-    //Check if the update went well
-    if (!isUpdateSuccessful) {
-      //Return an error message
-      return `Unable to update catalog, maybe ${
-        bookToBeUpdated.title
-      } was not cataloged`;
+    return bookToBeUpdated; //return the updated book
+  }
+
+  //this method updates the collectors list
+  updateCollectorList(updatedBook) {
+    let response = false;
+
+    //Iterate through the collectors
+    for (let collector of databaseHandler['collectors']) {
+      //Compare each collectors bookId with the id we are interested
+      if (updatedBook.getId() === collector.bookId) {
+        //Update every copies with the id we are interested
+        collector.updateCollector(updatedBook.title, updatedBook.author);
+
+        response = true;
+      }
     }
 
-    return updatedBook;
+    return response; //Return the update response
   }
 
   //This method returns all books
