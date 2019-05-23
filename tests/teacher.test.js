@@ -15,13 +15,13 @@ const book1 = admin.addBook('What Women Want', 'Magazine', 'Treasure Ogbonna');
 const book2 = admin.addBook('Chike the River', 'Literature', 'Chinuwa Achebe');
 
 //Functionalities of Teacher with respect to own account
-describe('All about Teacher own account functionalities', function() {
-  test('Teacher can be created', function() {
+describe('All about Teacher own account functionalities', () => {
+  test('Teacher can be created', () => {
     expect(teacher.firstName).toBe('David');
   });
 
-  describe('Teacher details can be updated', function() {
-    test('For the case of personal details', function() {
+  describe('Teacher details can be updated', () => {
+    test('For the case of personal details', () => {
       teacher.updatePersonalDetails(
         'Fola',
         'Tolu',
@@ -38,29 +38,29 @@ describe('All about Teacher own account functionalities', function() {
     });
   });
 
-  test('Teacher details can be read', function() {
+  test('Teacher details can be read', () => {
     expect(teacher.retrieveDetails()).toEqual(teacher);
   });
 });
 
-describe('Teacher borrowing book', function() {
-  test('For the case where a teacher demands for book and its available', function() {
+describe('Teacher borrowing book', () => {
+  test('For the case where a teacher demands for book and its available', () => {
     expect(teacher.borrowBook(book1.getId()).userId).toBe(teacher.getId());
   });
 
-  test('For the case where same teacher demands for another book and its available', function() {
+  test('For the case where same teacher demands for another book and its available', () => {
     expect(teacher.borrowBook(book2.getId()).userId).toBe(teacher.getId());
   });
 
-  test('For the case where same teacher demands for another copy of same book but its unavailable', function() {
+  test('For the case where same teacher demands for another copy of same book but its unavailable', () => {
     expect(teacher.borrowBook(book1.id)).toBe('Book Taken');
   });
 
-  test('For the case where teacher wants to return a book', function() {
+  test('For the case where teacher wants to return a book', () => {
     expect(teacher.returnBorrowedbook(book2.getId())).toBeTruthy();
   });
 });
 
-test('Teacher account can be deleted', function() {
+test('Teacher account can be deleted', () => {
   expect(teacher.delete()).toBeTruthy();
 });
