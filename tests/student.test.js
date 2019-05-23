@@ -8,10 +8,12 @@ const student = new Student(
   'Male',
   'Science',
   'Mathematics',
-  '200L'
+  '200'
 );
 
 const admin = new Admin('Izuking', 'Ogbodo', 'Male');
+const book1 = admin.addBook('What Women Want', 'Magazine', 'Treasure Ogbonna');
+const book2 = admin.addBook('Chike the River', 'Literature', 'Chinuwa Achebe');
 
 //Functionalities of Student with respect to own account
 describe('All about Student own account functionalities', () => {
@@ -40,28 +42,18 @@ describe('All about Student own account functionalities', () => {
     expect(student.retrieveDetails()).toEqual(student);
   });
 });
-describe('Student borrowing book', () => {
-  const book1 = admin.addBook(
-    'What Women Want',
-    'Magazine',
-    'Treasure Ogbonna'
-  );
-  const book2 = admin.addBook(
-    'Chike the River',
-    'Literature',
-    'Chinuwa Achebe'
-  );
 
+describe('Student borrowing book', () => {
   test('For the case where a student demands for book and its available', () => {
-    expect(student.borrowBook(book2.id).userId).toBe(student.id);
+    expect(student.borrowBook(book2.getId()).userId).toBe(student.getId());
   });
 
   test('For the case where same student demands for another book and its available', () => {
-    expect(student.borrowBook(book1.id).userId).toBe(student.id);
+    expect(student.borrowBook(book1.getId()).userId).toBe(student.getId());
   });
 
   test('For the case where same student demands for another copy of same book but its unavailable', () => {
-    expect(student.borrowBook(book2.id)).toBe('Book Taken');
+    expect(student.borrowBook(book2.getId())).toBe('Book Taken');
   });
 
   test('For the case where student wants to return a book', () => {

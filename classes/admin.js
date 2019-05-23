@@ -16,10 +16,7 @@ class Admin extends user {
 
     return users.find(user => user.getId() === id); //Compare each user id with the user id we are interested in and return it.
   }
-  //This method returns all users
-  getUsers() {
-    return databaseHandler['users'];
-  }
+
   //Get all users with same either first-name or last-name
   searchUserByName(name) {
     const users = this.getUsers(); //Returns the collection of Users

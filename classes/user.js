@@ -15,7 +15,7 @@ class User {
     this.faculty = faculty;
     this[isActive] = true;
 
-    this[id] = generateId(databaseHandler['users']); //Generates a new Id for this User
+    this[id] = generateId(this.getUsers()); //Generates a new Id for this User
 
     this.save(); //Save this user to the user database
   }
@@ -68,7 +68,10 @@ class User {
       }
     }
   }
-
+  //This method returns all users
+  getUsers() {
+    return databaseHandler['users'];
+  }
   //Gets user's information as an object
   retrieveDetails() {
     const users = this.getUsers(); //Returns the collection of Users

@@ -39,5 +39,10 @@ class Student extends user {
     this.level = level;
     this.matricNumber = matricNumber;
   }
+
+  //This method enables student to borrow book
+  borrowBook(bookId) {
+    return admin.prototype.lendBook(this, bookId);
+  }
 }
 module.exports = Student;
