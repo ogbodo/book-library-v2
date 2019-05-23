@@ -57,6 +57,6 @@ describe('Student borrowing book', () => {
   });
 
   test('For the case where student wants to return a book', () => {
-    expect(student.returnBorrowedbook(book2.id)).toBeTruthy();
+    expect(student.returnBorrowedbook(book2.getId())).toBeTruthy();
   });
 });

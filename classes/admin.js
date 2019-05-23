@@ -243,6 +243,29 @@ class Admin extends user {
   deleteBooks() {
     return bookLibrary.prototype.deleteAll();
   }
+
+  //This method implements the algorithm for returning a book
+  returnBook(bookId) {
+    const allBorrowedBooks = databaseHandler['collectors']; //Retrieves the list of all books borrowed thus far.
+
+    let itsRemoved = false; //Initialize to false
+
+    for (let index in allBorrowedBooks) {
+      //Compare each book-Ids with the book id we are interested in.
+      if (allBorrowedBooks[index].bookId === bookId) {
+        this.recordReturnActivity(bookId); //Acknowledge the return of this book
+        allBorrowedBooks.splice(index, 1); //Remove this book from the list of all books borrowed thus far
+        itsRemoved = true; //Sets to true
+        break;
+      }
+    }
+
+    return itsRemoved; //Return operation status
+  }
+  //Records the return activity
+  recordReturnActivity(bookId) {
+    return bookLibrary.prototype.recordBookReturned(bookId);
+  }
 }
 
 module.exports = Admin;

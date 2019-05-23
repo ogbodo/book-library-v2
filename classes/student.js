@@ -44,5 +44,10 @@ class Student extends user {
   borrowBook(bookId) {
     return admin.prototype.lendBook(this, bookId);
   }
+
+  //This method enables student to return borrowed book
+  returnBorrowedbook(bookId) {
+    return admin.prototype.returnBook(bookId);
+  }
 }
 module.exports = Student;
