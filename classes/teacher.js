@@ -8,5 +8,25 @@ class Teacher extends user {
     super(firstName, lastName, gender, 'TEACHER', faculty, department); //call the parent constructor with the required arguments
     this.staffId = staffId;
   }
+
+  //Updates user's details
+  updatePersonalDetails(
+    firstName = this.firstName,
+    lastName = this.lastName,
+    gender = this.gender,
+    faculty = this.faculty,
+    department = this.department,
+    staffId = this.staffId
+  ) {
+    //all the parent updatePersonalDetails method with the required arguments
+    super.updatePersonalDetails(
+      firstName,
+      lastName,
+      gender,
+      faculty,
+      department
+    );
+    this.staffId = staffId;
+  }
 }
 module.exports = Teacher;
