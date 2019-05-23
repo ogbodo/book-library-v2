@@ -122,6 +122,12 @@ class Admin extends user {
       author
     );
 
+    //Check if the update went well
+    if (updatedBook.title !== title) {
+      //Return an error message
+      return updatedBook;
+    }
+
     return updatedBook; //Return the updated book
   }
 

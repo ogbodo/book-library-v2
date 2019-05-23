@@ -49,24 +49,8 @@ class BookLibrary {
 
   //This Method updates the catalog record
   updateCatalog(updatedBook) {
-    let response;
-    //Iterate through the catalog
-    for (let catalog of databaseHandler['catalog']) {
-      //Compare each catalog bookId with the id we are interested
-      if (updatedBook.getId() === catalog.bookId) {
-        //Update every copies with the id we are interested
-        catalog.update(updatedBook.title, updatedBook.date);
-        return true; //return from here
-      }
-    }
+    if (typeof updatedBook.title === 'undefined') return 'invalid'; //Return invalid as response, because we wanted an object of valid type
 
-    //At this point the book has been borrowed out to a user.
-
-    return response; //Return the update response
-  }
-
-  //This Method updates the catalog record
-  updateCatalog(updatedBook) {
     //Iterate through the catalog
     for (let catalog of databaseHandler['catalog']) {
       //Compare each catalog bookId with the id we are interested
@@ -86,16 +70,14 @@ class BookLibrary {
   updateBook(bookToBeUpdated, title, category, author) {
     let isUpdateSuccessful = this.updateCatalog(bookToBeUpdated); //First make changes on all copies of this book in catalog record
 
+    if (isUpdateSuccessful === 'invalid') {
+      //Return an error message
+      return `Unable to update catalog, maybe '${bookToBeUpdated}' was not cataloged`;
+    }
+
     //Check if the update went well
     if (!isUpdateSuccessful) {
       isUpdateSuccessful = this.updateCollectorList(bookToBeUpdated); //Finally, apply this changes on all copies of this book in catalog record
-    }
-
-    if (!isUpdateSuccessful) {
-      //Return an error message
-      return `Unable to update catalog, maybe '${
-        bookToBeUpdated.title
-      }' was not cataloged`;
     }
 
     //Now go ahead to update book itself

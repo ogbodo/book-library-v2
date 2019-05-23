@@ -36,6 +36,16 @@ describe('All about Student own account functionalities', () => {
       expect(student.faculty).toBe('Art');
       expect(student.department).toBe('Visual and Creative Art');
     });
+
+    test('For the case of personal details updated with no argument', () => {
+      //Everything remains the-same
+      student.updatePersonalDetails();
+      expect(student.firstName).toBe('Ebuka');
+      expect(student.lastName).toBe('Joshua');
+      expect(student.gender).toBe('Female');
+      expect(student.faculty).toBe('Art');
+      expect(student.department).toBe('Visual and Creative Art');
+    });
   });
 
   test('Student details can be read', () => {

@@ -27,7 +27,8 @@ describe('All about Teacher own account functionalities', () => {
         'Tolu',
         'Male',
         'Science',
-        'Biology'
+        'Biology',
+        'Dev/09/340'
       );
 
       expect(teacher.firstName).toBe('Fola');
@@ -35,6 +36,17 @@ describe('All about Teacher own account functionalities', () => {
       expect(teacher.gender).toBe('Male');
       expect(teacher.faculty).toBe('Science');
       expect(teacher.department).toBe('Biology');
+      expect(teacher.staffId).toBe('Dev/09/340');
+    });
+    test('For the case of personal details updated with no argument', () => {
+      //Everything remains the-same
+      teacher.updatePersonalDetails();
+      expect(teacher.firstName).toBe('Fola');
+      expect(teacher.lastName).toBe('Tolu');
+      expect(teacher.gender).toBe('Male');
+      expect(teacher.faculty).toBe('Science');
+      expect(teacher.department).toBe('Biology');
+      expect(teacher.staffId).toBe('Dev/09/340');
     });
   });
 

@@ -163,12 +163,28 @@ describe('All about Admin as a librarian', () => {
       expect(teacher.borrowBook(book.getId()).bookTitle).toBe('The Cup');
     });
 
-    test('Admin can update a book detials', () => {
-      expect(admin.updateBookDetails(book, 'What I Need').title).toBe(
-        'What I Need'
-      );
-      //Now the borrowed book details has being updated accordingly
-      expect(book.title).toBe('What I Need');
+    describe('Admin can update a book details', () => {
+      test('Admin can update already borrowed book details', () => {
+        expect(admin.updateBookDetails(book, 'What I Need').title).toBe(
+          'What I Need'
+        );
+        //Now the borrowed book details has being updated accordingly
+        expect(book.title).toBe('What I Need');
+      });
+
+      test('Admin can update book details', () => {
+        const book = admin.addBook('Escape plan', 'Textbook', 'Micheal Joy');
+
+        expect(
+          admin.updateBookDetails(book, 'Escape plan pt two', 'journal').title
+        ).toBe('Escape plan pt two');
+      });
+
+      test('For the case where admin want to update book which does not exist', () => {
+        expect(admin.updateBookDetails('Wrong Turn', 'Wrong Turn pt two')).toBe(
+          "Unable to update catalog, maybe 'Wrong Turn' was not cataloged"
+        );
+      });
     });
   });
 
