@@ -1,4 +1,4 @@
-const user = require('./user'); //Import the User Object
+const user = require('./user'); //Import the User class
 const bookLibrary = require('./book-library'); //Import the book library
 const databaseHandler = require('../databases/database'); //Import the database
 const collector = require('../classes/collector'); //Import our helper function that generates unique IDs.

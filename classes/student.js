@@ -1,5 +1,5 @@
-const user = require('./user'); //Import the User object
-const admin = require('./admin'); //Import the Admin object
+const user = require('./user'); //Import the User class
+const admin = require('./admin'); //Import the Admin class
 
 //Make Student to inherit from User by using the extends key word
 class Student extends user {

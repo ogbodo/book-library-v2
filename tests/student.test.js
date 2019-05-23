@@ -1,5 +1,5 @@
-const Student = require('../classes/student'); //Import the Student object
-const Admin = require('../classes/admin'); //Import the Admin object
+const Student = require('../classes/student'); //Import the Student class
+const Admin = require('../classes/admin'); //Import the Admin class
 
 const student = new Student(
   'Solomon',
