@@ -10,18 +10,19 @@ senior student is asking for, the senior student comes first.
 Admin serves as the Librarian.
 
 ### To setup and run the project
-```
-Clone the Project
-Make sure you have Node.js Installed
-Install the jest framework for testing
-npm init
-npm install --save-dev jest
 
-// change the value of test in scripts to jest in your package.json
+1. Clone the Project
 
-{
-  "scripts": {
-    "test": "jest"
-  }
-}
-To run all test cases: npm test
+2. Make sure you have Node.js Installed. Or you can download it [here](https://nodejs.org/en/download/)
+
+3. To initialize this project, you will need to create a `package.json` by running the command `npm init`.
+   This will begin the creation process and prompt you for a bunch of information about the project,       
+   which you can simply keep pressing "enter" to use default values. Or, to create the `package.json`      
+   without having to keep pressing enter, you can simply run `npm init --yes` or `npm init -y`.
+
+4. In your project folder, you should see the `package.json`file. change the value of "test" property in the file to "jest" and save.
+     i.e: `{ "scripts": { "test": "jest"} }`
+              
+5. To install jest, run `npm install --save-dev jest`
+ 
+6. To run all test cases, run `npm test`
